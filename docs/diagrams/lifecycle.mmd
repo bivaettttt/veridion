@@ -1,0 +1,15 @@
+stateDiagram-v2
+    [*] --> QUEUED
+    QUEUED --> DONE: Parse, encode and commit
+    QUEUED --> FAILED: Roll back import savepoint
+    FAILED --> [*]
+    DONE --> [*]
+
+    state Review {
+      [*] --> AUTO_ASSESSED
+      AUTO_ASSESSED --> IN_REVIEW: Member provides rationale
+      IN_REVIEW --> VERIFIED: Reviewer approves
+      IN_REVIEW --> REJECTED: Reviewer rejects
+      IN_REVIEW --> NEEDS_MORE_EVIDENCE: Reviewer returns
+      NEEDS_MORE_EVIDENCE --> IN_REVIEW: Member resubmits
+    }

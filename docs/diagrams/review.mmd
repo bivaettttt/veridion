@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant R as Researcher
+    participant A as API
+    participant D as PostgreSQL
+    participant V as Reviewer
+    R->>A: Submit with current revision and rationale
+    A->>D: Lock answer and append IN_REVIEW
+    V->>A: Submit decision and expected revision
+    A->>D: Lock answer and recheck role/revision
+    alt Valid transition
+      A->>D: Append decision and audit event
+      A-->>V: New revision
+    else Concurrent change
+      A-->>V: 409 Refresh the answer
+    end

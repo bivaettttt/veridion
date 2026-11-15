@@ -1,0 +1,20 @@
+erDiagram
+    USERS ||--o{ SESSIONS : obtains
+    USERS ||--o{ MEMBERS : joins
+    PROJECTS ||--o{ MEMBERS : grants
+    PROJECTS ||--o{ SOURCES : owns
+    SOURCES ||--o{ JOBS : queues
+    SOURCES ||--o{ SOURCE_VERSIONS : accumulates
+    SOURCE_VERSIONS ||--o{ SECTIONS : contains
+    SECTIONS ||--o{ CHUNKS : splits
+    CHUNKS ||--o{ EMBEDDINGS : encodes
+    PROJECTS ||--o{ SEARCH_RUNS : records
+    SEARCH_RUNS ||--o| ANSWERS : informs
+    ANSWERS ||--o{ CITATIONS : includes
+    CHUNKS ||--o{ CITATIONS : anchors
+    ANSWERS ||--o{ REVIEWS : receives
+    PROJECTS ||--o{ REPORTS : groups
+    REPORTS ||--|{ SNAPSHOTS : freezes
+    PROJECTS ||--o{ EVALUATION_RUNS : evaluates
+    PROJECTS ||--o{ LAB_RUNS : tests
+    PROJECTS ||--o{ AUDIT : audits

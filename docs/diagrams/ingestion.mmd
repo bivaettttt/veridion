@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant U as Researcher
+    participant A as API
+    participant D as PostgreSQL
+    participant W as Worker
+    U->>A: Submit version
+    A->>D: Check project, source and duplicate hash
+    A-->>U: Accepted with job ID
+    W->>D: Claim next queued job with SKIP LOCKED
+    W->>W: Parse, normalize, split and encode
+    W->>D: Commit original, offsets, vectors and job state
+    U->>A: Read ingestion status
+    A-->>U: Queued, done or failed

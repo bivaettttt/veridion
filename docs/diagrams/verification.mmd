@@ -1,0 +1,10 @@
+sequenceDiagram
+    participant U as Project member
+    participant A as API
+    participant D as PostgreSQL
+    U->>A: Check citation with answer, chunk, version, quote and hash
+    A->>D: Verify membership and load scoped answer
+    A->>D: Load chunk and exact excerpt from immutable version
+    D-->>A: Stored range, content, hash and current version
+    A->>A: Match run context, excerpt and stored offsets
+    A-->>U: Integrity and current or historical freshness
