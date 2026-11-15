@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant U as Researcher
+    participant A as FastAPI
+    participant P as PostgreSQL
+    participant M as Local Ollama
+    U->>A: Ask in project
+    A->>P: Verify membership, choose versions and retrieve context
+    opt Generative mode
+      A->>M: Generate using bounded context
+      M-->>A: Structured candidate result
+    end
+    A->>P: Save run, context, citations and assessment
+    A-->>U: Answer or evidence gap

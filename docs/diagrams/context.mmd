@@ -1,0 +1,10 @@
+flowchart LR
+    U[Researcher / Analyst / Reviewer / Admin] --> V[Veridion]
+    V -->|Optional local inference| M[Ollama]
+    subgraph V[Veridion]
+      W[React workspace] --> A[FastAPI]
+      A --> P[(PostgreSQL + pgvector)]
+      I[Import worker] --> P
+      I --> E[Local multilingual embedding model]
+      A --> E
+    end
