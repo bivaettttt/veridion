@@ -29,6 +29,6 @@ A local hybrid extractive run returned 1.00 for each of those five metrics on th
 
 ## Model-dependent evaluation
 
-`python scripts/check_model.py` submits the capacity question to a real configured Ollama endpoint. It checks that the API saves a model digest and supplied context, reports the evidence gap, returns a reviewable draft and verifies both source links. The candidate still needs semantic review. An early run incorrectly interpreted incomplete measurements as evidence of an upper bound. The deterministic assessment preserved the evidence gap. The revised prompt explicitly distinguishes an untested threshold from a measured maximum.
+`python scripts/check_model.py` submits the capacity question to a real configured Ollama endpoint. It checks that the API saves a model digest and supplied context, reports the evidence gap, returns a reviewable draft and verifies both source links. The candidate still needs semantic review. An early run incorrectly interpreted incomplete measurements as evidence of an upper bound. The deterministic assessment preserved the evidence gap. Prompt v4 supplies the deterministic evidence assessment and checks whether a generated summary preserves an evidence gap. A local qwen2.5:3b run with prompt v4 produced a reviewable draft, retained INSUFFICIENT_EVIDENCE, and cited the exact test and requirement passages. Both citations verified. The model digest begins with 357c53fb659c.
 
 See the [latest project status](../PROJECT_STATUS.md) for local and GitHub verification and remaining gaps.

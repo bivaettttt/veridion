@@ -137,7 +137,7 @@ try {
   await open("/answers/" + result.id, "Answer details");
   await page
     .getByRole("heading", { name: "Human review" })
-    .scrollIntoViewIfNeeded();
+    .evaluate((element) => element.scrollIntoView({ block: "center" }));
   await image("human-review");
   await open("/reports/" + run.id, "Northstar capacity assessment");
   await page.getByRole("button", { name: "Save new snapshot" }).waitFor();
@@ -151,6 +151,15 @@ try {
   await open("/lab", "Veridion Lab");
   await page.getByRole("heading", { name: "Scenario results" }).waitFor();
   await image("lab");
+  if (process.env.VERIDION_CAPTURE_OLLAMA === "1") {
+    const generated = await send(
+      "Does the platform support 10 000 concurrent users?",
+      "ollama",
+    );
+    await open("/answers/" + generated.id, "Answer details");
+    await page.getByText("Requires review", { exact: true }).waitFor();
+    await image("ollama-research");
+  }
 } finally {
   await browser.close();
 }

@@ -18,4 +18,10 @@ Veridion is a locally runnable portfolio MVP for traceable research on synthetic
 - Model reconstruction records artifact digest and configuration. Generative output may vary when rerun. Markdown snapshot original-file links are relative to a running workspace and need its authentication.
 - Local Docker had exhausted automatic subnet allocation. A host-only Compose override assigned a free subnet for Veridion. CI uses standard Compose networking. The local Docker VM has 4 GB shared with other stacks. Local browser and model verification used the already indexed corpus with the import worker paused after memory pressure interrupted the full local test run.
 
+## Verification
+
+- The [Actions workflow](https://github.com/bivaettttt/veridion/actions/workflows/quality.yml) runs Compose on Ubuntu 24.04, PostgreSQL integration, API and browser checks, type validation and secret scanning.
+- The real local Qwen draft for the capacity question preserved the evidence gap and cited two valid original excerpts. Rule-based checks cover that specific class of unsupported inference.
+- The [screenshot gallery](../assets/screenshots/README.md) contains captures from the running local stack. Each image is 1440 × 1000.
+
 Verification details and instructions are in the [test results](testing/verification.md). Use the [portfolio case](PORTFOLIO.md) for the interview walkthrough.

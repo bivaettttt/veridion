@@ -1,0 +1,13 @@
+flowchart LR
+    question[Research question] --> auth[Project membership]
+    auth --> rank[Version-scoped ranking]
+    chunks[(Immutable chunks and local embeddings)] --> rank
+    rank --> assess[Typed evidence assessment]
+    assess --> report[Saved answer and provenance]
+    assess --> context[Bounded eligible evidence]
+    context --> model[Optional local Ollama]
+    model --> validation[Citation and evidence-gap checks]
+    validation --> report
+    report --> review[Review revision and rationale]
+    report --> snapshot[Report snapshot]
+    review --> snapshot

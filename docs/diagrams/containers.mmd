@@ -1,0 +1,15 @@
+C4Container
+    title Veridion containers
+    Person(member, "Project member", "Uses the research workspace in a browser")
+    System_Ext(ollama, "Local Ollama", "Optional language model")
+    System_Boundary(veridion, "Veridion") {
+        Container(web, "Research workspace", "React, TypeScript and Nginx", "Displays sources, analysis and review history")
+        Container(api, "Research API", "FastAPI and SQLAlchemy", "Performs authorization, retrieval, citation verification and review")
+        Container(worker, "Import worker", "Python and ONNX Runtime", "Parses documents and indexes normalized text")
+        ContainerDb(db, "Research data", "PostgreSQL and pgvector", "Stores original files, immutable citations, vectors and audit events")
+    }
+    Rel(member, web, "Uses", "Browser")
+    Rel(web, api, "Calls same-origin endpoints", "REST/JSON")
+    Rel(api, db, "Reads and commits scoped research data", "SQL")
+    Rel(worker, db, "Claims ingest jobs and stores indexes", "SQL")
+    Rel(api, ollama, "Requests structured drafts", "HTTP/JSON")

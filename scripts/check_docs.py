@@ -2,7 +2,11 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-pages = [*ROOT.glob("README*.md"), *ROOT.joinpath("docs").rglob("*.md")]
+pages = [
+    *ROOT.glob("README*.md"),
+    *ROOT.joinpath("docs").rglob("*.md"),
+    *ROOT.joinpath("assets").rglob("*.md"),
+]
 bad = []
 for page in pages:
     for link in re.findall(r"\]\(([^)\s]+)\)", page.read_text()):

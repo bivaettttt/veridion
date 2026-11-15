@@ -1,10 +1,11 @@
-flowchart LR
-    U[Researcher / Analyst / Reviewer / Admin] --> V[Veridion]
-    V -->|Optional local inference| M[Ollama]
-    subgraph V[Veridion]
-      W[React workspace] --> A[FastAPI]
-      A --> P[(PostgreSQL + pgvector)]
-      I[Import worker] --> P
-      I --> E[Local multilingual embedding model]
-      A --> E
-    end
+C4Context
+    title Veridion system context
+    Person(researcher, "Researcher or analyst", "Imports and investigates project evidence")
+    Person(reviewer, "Reviewer", "Records an evidence decision with rationale")
+    Person(admin, "Administrator", "Manages project roles and inspects audit history")
+    System(veridion, "Veridion", "Research workspace for versioned documents, citations and decisions")
+    System_Ext(ollama, "Local Ollama", "Optional local language model")
+    Rel(researcher, veridion, "Imports sources, asks questions, prepares a report", "HTTPS or local HTTP")
+    Rel(reviewer, veridion, "Reviews evidence and records decisions")
+    Rel(admin, veridion, "Maintains access and inspects activity")
+    Rel(veridion, ollama, "Sends bounded excerpts when explicitly configured", "JSON over local HTTP")
