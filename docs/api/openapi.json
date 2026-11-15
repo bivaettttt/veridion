@@ -1,0 +1,2184 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Veridion",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/health": {
+            "get": {
+                "tags": [
+                    "Operations"
+                ],
+                "summary": "Health",
+                "operationId": "health_api_v1_health_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "Access"
+                ],
+                "summary": "Login",
+                "operationId": "login_api_v1_auth_login_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Login"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/logout": {
+            "post": {
+                "tags": [
+                    "Access"
+                ],
+                "summary": "Logout",
+                "operationId": "logout_api_v1_auth_logout_post",
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/me": {
+            "get": {
+                "tags": [
+                    "Access"
+                ],
+                "summary": "Me",
+                "operationId": "me_api_v1_auth_me_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users": {
+            "post": {
+                "tags": [
+                    "Access"
+                ],
+                "summary": "New User",
+                "operationId": "new_user_api_v1_users_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewUser"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Projects",
+                "operationId": "projects_api_v1_projects_get",
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100000,
+                            "minimum": 0,
+                            "default": 0,
+                            "title": "Offset"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Create Project",
+                "operationId": "create_project_api_v1_projects_post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Project"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Project Detail",
+                "operationId": "project_detail_api_v1_projects__project__get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/members": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Members",
+                "operationId": "members_api_v1_projects__project__members_get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Set Member",
+                "operationId": "set_member_api_v1_projects__project__members_put",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Member"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/sources": {
+            "get": {
+                "tags": [
+                    "Sources"
+                ],
+                "summary": "List Sources",
+                "operationId": "list_sources_api_v1_projects__project__sources_get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100000,
+                            "minimum": 0,
+                            "default": 0,
+                            "title": "Offset"
+                        }
+                    },
+                    {
+                        "name": "archived",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "Archived"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/documents": {
+            "post": {
+                "tags": [
+                    "Sources"
+                ],
+                "summary": "Upload",
+                "operationId": "upload_api_v1_projects__project__documents_post",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_upload_api_v1_projects__project__documents_post"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/sources/{source_id}": {
+            "delete": {
+                "tags": [
+                    "Sources"
+                ],
+                "summary": "Archive",
+                "operationId": "archive_api_v1_projects__project__sources__source_id__delete",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "source_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Source Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/sources/{source_id}/versions": {
+            "get": {
+                "tags": [
+                    "Sources"
+                ],
+                "summary": "Versions",
+                "operationId": "versions_api_v1_projects__project__sources__source_id__versions_get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "source_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Source Id"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100000,
+                            "minimum": 0,
+                            "default": 0,
+                            "title": "Offset"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/sources/{source_id}/versions/{number}": {
+            "get": {
+                "tags": [
+                    "Sources"
+                ],
+                "summary": "Version",
+                "operationId": "version_api_v1_projects__project__sources__source_id__versions__number__get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "source_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Source Id"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/sources/{source_id}/versions/{number}/original": {
+            "get": {
+                "tags": [
+                    "Sources"
+                ],
+                "summary": "Download",
+                "operationId": "download_api_v1_projects__project__sources__source_id__versions__number__original_get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "source_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Source Id"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/jobs": {
+            "get": {
+                "tags": [
+                    "Sources"
+                ],
+                "summary": "Ingestion",
+                "operationId": "ingestion_api_v1_projects__project__jobs_get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100000,
+                            "minimum": 0,
+                            "default": 0,
+                            "title": "Offset"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/audit": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Audit",
+                "operationId": "audit_api_v1_projects__project__audit_get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100000,
+                            "minimum": 0,
+                            "default": 0,
+                            "title": "Offset"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/models": {
+            "get": {
+                "tags": [
+                    "Research"
+                ],
+                "summary": "Models",
+                "operationId": "models_api_v1_models_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/search": {
+            "post": {
+                "tags": [
+                    "Research"
+                ],
+                "summary": "Search",
+                "operationId": "search_api_v1_projects__project__search_post",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Search"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/search/runs": {
+            "get": {
+                "tags": [
+                    "Research"
+                ],
+                "summary": "Search History",
+                "operationId": "search_history_api_v1_projects__project__search_runs_get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100000,
+                            "minimum": 0,
+                            "default": 0,
+                            "title": "Offset"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/answers": {
+            "post": {
+                "tags": [
+                    "Research"
+                ],
+                "summary": "Ask",
+                "operationId": "ask_api_v1_projects__project__answers_post",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "Idempotency-Key",
+                        "in": "header",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "pattern": "^[A-Za-z0-9_-]{1,120}$"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Idempotency-Key"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Question"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Research"
+                ],
+                "summary": "Answer List",
+                "operationId": "answer_list_api_v1_projects__project__answers_get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100000,
+                            "minimum": 0,
+                            "default": 0,
+                            "title": "Offset"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/answers/{answer_id}": {
+            "get": {
+                "tags": [
+                    "Research"
+                ],
+                "summary": "Answer Detail",
+                "operationId": "answer_detail_api_v1_projects__project__answers__answer_id__get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "answer_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Answer Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/citations/verify": {
+            "post": {
+                "tags": [
+                    "Evidence"
+                ],
+                "summary": "Verify",
+                "operationId": "verify_api_v1_projects__project__citations_verify_post",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CitationCheck"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/answers/{answer_id}/reviews": {
+            "post": {
+                "tags": [
+                    "Evidence"
+                ],
+                "summary": "Review",
+                "operationId": "review_api_v1_projects__project__answers__answer_id__reviews_post",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "answer_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Answer Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Review"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/reports": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Reports",
+                "operationId": "reports_api_v1_projects__project__reports_get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100000,
+                            "minimum": 0,
+                            "default": 0,
+                            "title": "Offset"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Create Report",
+                "operationId": "create_report_api_v1_projects__project__reports_post",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Report"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/reports/{report_id}": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Report Detail",
+                "operationId": "report_detail_api_v1_projects__project__reports__report_id__get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Report Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/reports/{report_id}/snapshots": {
+            "post": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Report Snapshot",
+                "operationId": "report_snapshot_api_v1_projects__project__reports__report_id__snapshots_post",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Report Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_report_snapshot_api_v1_projects__project__reports__report_id__snapshots_post"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/reports/{report_id}/snapshots/{revision}/export": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Export Report",
+                "operationId": "export_report_api_v1_projects__project__reports__report_id__snapshots__revision__export_get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Report Id"
+                        }
+                    },
+                    {
+                        "name": "revision",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Revision"
+                        }
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "enum": [
+                                "json",
+                                "md"
+                            ],
+                            "type": "string",
+                            "default": "json",
+                            "title": "Format"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/evaluations": {
+            "post": {
+                "tags": [
+                    "Evaluation"
+                ],
+                "summary": "Run Evaluation",
+                "operationId": "run_evaluation_api_v1_projects__project__evaluations_post",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Evaluation"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Evaluation"
+                ],
+                "summary": "Evaluation History",
+                "operationId": "evaluation_history_api_v1_projects__project__evaluations_get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100000,
+                            "minimum": 0,
+                            "default": 0,
+                            "title": "Offset"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{project}/lab": {
+            "post": {
+                "tags": [
+                    "Evaluation"
+                ],
+                "summary": "Run Lab",
+                "operationId": "run_lab_api_v1_projects__project__lab_post",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Evaluation"
+                ],
+                "summary": "Lab History",
+                "operationId": "lab_history_api_v1_projects__project__lab_get",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Project"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100000,
+                            "minimum": 0,
+                            "default": 0,
+                            "title": "Offset"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Body_report_snapshot_api_v1_projects__project__reports__report_id__snapshots_post": {
+                "properties": {
+                    "notes": {
+                        "type": "string",
+                        "maxLength": 5000,
+                        "title": "Notes",
+                        "default": ""
+                    },
+                    "answer_id": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Answer Id"
+                    }
+                },
+                "type": "object",
+                "title": "Body_report_snapshot_api_v1_projects__project__reports__report_id__snapshots_post"
+            },
+            "Body_upload_api_v1_projects__project__documents_post": {
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "format": "binary",
+                        "title": "File"
+                    },
+                    "title": {
+                        "type": "string",
+                        "maxLength": 180,
+                        "minLength": 1,
+                        "title": "Title"
+                    },
+                    "category": {
+                        "type": "string",
+                        "enum": [
+                            "specification",
+                            "test",
+                            "architecture",
+                            "meeting",
+                            "advisory",
+                            "other"
+                        ],
+                        "title": "Category"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "file",
+                    "title",
+                    "category"
+                ],
+                "title": "Body_upload_api_v1_projects__project__documents_post"
+            },
+            "CitationCheck": {
+                "properties": {
+                    "answer_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Answer Id"
+                    },
+                    "chunk_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Chunk Id"
+                    },
+                    "version_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Version Id"
+                    },
+                    "quote": {
+                        "type": "string",
+                        "maxLength": 1600,
+                        "minLength": 1,
+                        "title": "Quote"
+                    },
+                    "content_hash": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "minLength": 64,
+                        "title": "Content Hash"
+                    }
+                },
+                "additionalProperties": false,
+                "type": "object",
+                "required": [
+                    "answer_id",
+                    "chunk_id",
+                    "version_id",
+                    "quote",
+                    "content_hash"
+                ],
+                "title": "CitationCheck"
+            },
+            "Evaluation": {
+                "properties": {
+                    "mode": {
+                        "type": "string",
+                        "enum": [
+                            "keyword",
+                            "semantic",
+                            "hybrid"
+                        ],
+                        "title": "Mode",
+                        "default": "hybrid"
+                    },
+                    "provider": {
+                        "type": "string",
+                        "enum": [
+                            "extractive",
+                            "ollama"
+                        ],
+                        "title": "Provider",
+                        "default": "extractive"
+                    }
+                },
+                "additionalProperties": false,
+                "type": "object",
+                "title": "Evaluation"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "Login": {
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "maxLength": 180,
+                        "minLength": 1,
+                        "title": "Email"
+                    },
+                    "password": {
+                        "type": "string",
+                        "maxLength": 150,
+                        "minLength": 1,
+                        "title": "Password"
+                    }
+                },
+                "additionalProperties": false,
+                "type": "object",
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "title": "Login"
+            },
+            "Member": {
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "maxLength": 180,
+                        "minLength": 1,
+                        "title": "Email"
+                    },
+                    "role": {
+                        "type": "string",
+                        "enum": [
+                            "RESEARCHER",
+                            "ANALYST",
+                            "REVIEWER",
+                            "ADMIN"
+                        ],
+                        "title": "Role"
+                    }
+                },
+                "additionalProperties": false,
+                "type": "object",
+                "required": [
+                    "email",
+                    "role"
+                ],
+                "title": "Member"
+            },
+            "NewUser": {
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "maxLength": 180,
+                        "minLength": 1,
+                        "title": "Email"
+                    },
+                    "password": {
+                        "type": "string",
+                        "maxLength": 150,
+                        "minLength": 1,
+                        "title": "Password"
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 180,
+                        "minLength": 1,
+                        "title": "Name"
+                    }
+                },
+                "additionalProperties": false,
+                "type": "object",
+                "required": [
+                    "email",
+                    "password",
+                    "name"
+                ],
+                "title": "NewUser"
+            },
+            "Project": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 180,
+                        "minLength": 1,
+                        "title": "Name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "maxLength": 2000,
+                        "title": "Description",
+                        "default": ""
+                    }
+                },
+                "additionalProperties": false,
+                "type": "object",
+                "required": [
+                    "name"
+                ],
+                "title": "Project"
+            },
+            "Question": {
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "maxLength": 500,
+                        "minLength": 2,
+                        "title": "Query"
+                    },
+                    "mode": {
+                        "type": "string",
+                        "enum": [
+                            "keyword",
+                            "semantic",
+                            "hybrid"
+                        ],
+                        "title": "Mode",
+                        "default": "hybrid"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "maximum": 20.0,
+                        "minimum": 1.0,
+                        "title": "Limit",
+                        "default": 8
+                    },
+                    "as_of": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "As Of"
+                    },
+                    "category": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "enum": [
+                                    "specification",
+                                    "test",
+                                    "architecture",
+                                    "meeting",
+                                    "advisory",
+                                    "other"
+                                ]
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Category"
+                    },
+                    "source_id": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Source Id"
+                    },
+                    "provider": {
+                        "type": "string",
+                        "enum": [
+                            "extractive",
+                            "ollama"
+                        ],
+                        "title": "Provider",
+                        "default": "extractive"
+                    }
+                },
+                "additionalProperties": false,
+                "type": "object",
+                "required": [
+                    "query"
+                ],
+                "title": "Question"
+            },
+            "Report": {
+                "properties": {
+                    "answer_id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Answer Id"
+                    },
+                    "title": {
+                        "type": "string",
+                        "maxLength": 180,
+                        "minLength": 1,
+                        "title": "Title"
+                    },
+                    "notes": {
+                        "type": "string",
+                        "maxLength": 5000,
+                        "title": "Notes",
+                        "default": ""
+                    }
+                },
+                "additionalProperties": false,
+                "type": "object",
+                "required": [
+                    "answer_id",
+                    "title"
+                ],
+                "title": "Report"
+            },
+            "Review": {
+                "properties": {
+                    "decision": {
+                        "type": "string",
+                        "enum": [
+                            "IN_REVIEW",
+                            "VERIFIED",
+                            "REJECTED",
+                            "NEEDS_MORE_EVIDENCE"
+                        ],
+                        "title": "Decision"
+                    },
+                    "rationale": {
+                        "type": "string",
+                        "maxLength": 2000,
+                        "minLength": 5,
+                        "title": "Rationale"
+                    },
+                    "revision": {
+                        "type": "integer",
+                        "minimum": 0.0,
+                        "title": "Revision"
+                    }
+                },
+                "additionalProperties": false,
+                "type": "object",
+                "required": [
+                    "decision",
+                    "rationale",
+                    "revision"
+                ],
+                "title": "Review"
+            },
+            "Search": {
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "maxLength": 500,
+                        "minLength": 2,
+                        "title": "Query"
+                    },
+                    "mode": {
+                        "type": "string",
+                        "enum": [
+                            "keyword",
+                            "semantic",
+                            "hybrid"
+                        ],
+                        "title": "Mode",
+                        "default": "hybrid"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "maximum": 20.0,
+                        "minimum": 1.0,
+                        "title": "Limit",
+                        "default": 8
+                    },
+                    "as_of": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "As Of"
+                    },
+                    "category": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "enum": [
+                                    "specification",
+                                    "test",
+                                    "architecture",
+                                    "meeting",
+                                    "advisory",
+                                    "other"
+                                ]
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Category"
+                    },
+                    "source_id": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Source Id"
+                    }
+                },
+                "additionalProperties": false,
+                "type": "object",
+                "required": [
+                    "query"
+                ],
+                "title": "Search"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        }
+    }
+}
