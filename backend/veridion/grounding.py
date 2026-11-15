@@ -255,3 +255,21 @@ def assess(question: str, hits: list[dict[str, Any]]):
             )
         ),
     }
+
+
+GAP_LANGUAGE = re.compile(
+    r"insufficient|unknown|unverified|not (?:yet )?(?:established|verified|tested|confirmed|demonstrated)"
+    r"|evidence (?:does not|doesn't) establish|недостаточ|не подтвержд|не провер|не установлен",
+    re.I,
+)
+UNSUPPORTED_INFERENCE = re.compile(
+    r"\bmaximum\b|\bupper bound\b|\bat most\b|\blimited to\b|\b(?:does|did) not (?:meet|support)"
+    r"|максимум|не поддержива|предел нагрузки",
+    re.I,
+)
+
+
+def preserves_evidence_gap(summary: str) -> bool:
+    return bool(GAP_LANGUAGE.search(summary)) and not UNSUPPORTED_INFERENCE.search(
+        summary
+    )

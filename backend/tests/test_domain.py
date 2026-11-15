@@ -94,3 +94,17 @@ def test_modalities_and_compound_claims():
         "content": "Build 2.0 documents REST and SOAP integration. Build 2.0 plans 99.99% availability."
     }
     assert {fact.value for fact in extract(row)} == {"REST", "SOAP", "99.99"}
+
+
+def test_generation_cannot_recast_untested_target_as_a_maximum():
+    from veridion.grounding import preserves_evidence_gap
+
+    assert preserves_evidence_gap(
+        "The 10,000-user target remains unverified. The test observed 2,000 users."
+    )
+    assert not preserves_evidence_gap(
+        "The target is unverified and the maximum is 2,000 users."
+    )
+    assert not preserves_evidence_gap(
+        "The test proves the system does not support the specified load."
+    )
